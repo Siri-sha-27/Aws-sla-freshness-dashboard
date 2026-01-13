@@ -1,0 +1,6 @@
+order_id,payment_sequential,payment_type,payment_installments,payment_value,order_purchase_timestamp,date,hour
+6333046a213dd2a7a2fa8909a8111bfb,1,credit_card,3,173.89,2018-06-05 00:26:37,2018-06-05,0
+5e724a9bb565d4ccd9078fec28d4fdc8,1,credit_card,3,247.06,2018-06-05 00:42:43,2018-06-05,0
+a6cb10ee1e2b8d61f857c29323efa291,1,credit_card,2,154.38,2018-06-05 00:38:47,2018-06-05,0
+f0654e0a53d2856f440bf6c3d7544172,1,credit_card,5,475.02,2018-06-05 00:43:11,2018-06-05,0
+8c2228de3ce29abb8e11211b8fa27001,1,credit_card,1,309.81,2018-06-05 00:05:17,2018-06-05,0

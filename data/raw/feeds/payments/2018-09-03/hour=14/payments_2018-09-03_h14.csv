@@ -1,0 +1,2 @@
+order_id,payment_sequential,payment_type,payment_installments,payment_value,order_purchase_timestamp,date,hour
+4637ca194b6387e2d538dc89b124b0ee,1,not_defined,1,0.0,2018-09-03 14:14:25,2018-09-03,14

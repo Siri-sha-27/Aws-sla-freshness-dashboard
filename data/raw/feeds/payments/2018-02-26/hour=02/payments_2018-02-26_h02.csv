@@ -1,0 +1,4 @@
+order_id,payment_sequential,payment_type,payment_installments,payment_value,order_purchase_timestamp,date,hour
+fb260abf14e47c95a0b19acb1ab3ed43,3,voucher,1,14.06,2018-02-26 02:03:03,2018-02-26,2
+fb260abf14e47c95a0b19acb1ab3ed43,2,voucher,1,20.0,2018-02-26 02:03:03,2018-02-26,2
+fb260abf14e47c95a0b19acb1ab3ed43,1,voucher,1,0.94,2018-02-26 02:03:03,2018-02-26,2

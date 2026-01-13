@@ -1,0 +1,5 @@
+order_id,payment_sequential,payment_type,payment_installments,payment_value,order_purchase_timestamp,date,hour
+3d56cf18c16869e9c0d59c4460a0aa30,1,boleto,1,75.17,2018-01-17 01:50:39,2018-01-17,1
+5598c9279a720364f3f77991903482eb,1,credit_card,4,44.09,2018-01-17 01:19:19,2018-01-17,1
+4be62b3acae38a6d30f707af9d5c4339,1,credit_card,1,29.33,2018-01-17 01:49:44,2018-01-17,1
+4ed7bfce6beab8e845d01d46439d9ad9,1,credit_card,3,64.14,2018-01-17 01:57:30,2018-01-17,1

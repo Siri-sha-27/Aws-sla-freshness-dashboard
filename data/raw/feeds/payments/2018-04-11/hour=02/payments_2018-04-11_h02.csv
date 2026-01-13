@@ -1,0 +1,3 @@
+order_id,payment_sequential,payment_type,payment_installments,payment_value,order_purchase_timestamp,date,hour
+0f14db1abb2772e95d78a72c30d69678,1,credit_card,10,155.6,2018-04-11 02:48:15,2018-04-11,2
+0f14db1abb2772e95d78a72c30d69678,2,voucher,1,53.45,2018-04-11 02:48:15,2018-04-11,2

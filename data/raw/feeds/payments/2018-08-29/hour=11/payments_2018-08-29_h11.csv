@@ -1,0 +1,2 @@
+order_id,payment_sequential,payment_type,payment_installments,payment_value,order_purchase_timestamp,date,hour
+d03ca98f59480e7e76c71fa83ecd8fb6,1,credit_card,2,119.42,2018-08-29 11:06:11,2018-08-29,11

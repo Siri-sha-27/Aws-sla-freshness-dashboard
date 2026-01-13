@@ -1,0 +1,4 @@
+order_id,payment_sequential,payment_type,payment_installments,payment_value,order_purchase_timestamp,date,hour
+51efa345a1180ca3879442a31b0a265a,3,voucher,1,194.88,2017-05-20 01:57:17,2017-05-20,1
+51efa345a1180ca3879442a31b0a265a,2,voucher,1,194.88,2017-05-20 01:57:17,2017-05-20,1
+51efa345a1180ca3879442a31b0a265a,1,credit_card,1,29.28,2017-05-20 01:57:17,2017-05-20,1

@@ -1,0 +1,6 @@
+order_id,payment_sequential,payment_type,payment_installments,payment_value,order_purchase_timestamp,date,hour
+d709f76aa4bb3f06603642d3a70bc3ee,1,boleto,1,49.65,2018-05-13 08:13:53,2018-05-13,8
+cac1850fae99ea24a8186fad4db365bb,2,voucher,1,20.0,2018-05-13 08:23:22,2018-05-13,8
+cac1850fae99ea24a8186fad4db365bb,3,voucher,1,20.0,2018-05-13 08:23:22,2018-05-13,8
+cac1850fae99ea24a8186fad4db365bb,4,voucher,1,18.87,2018-05-13 08:23:22,2018-05-13,8
+cac1850fae99ea24a8186fad4db365bb,1,voucher,1,20.0,2018-05-13 08:23:22,2018-05-13,8

@@ -1,0 +1,2 @@
+order_id,payment_sequential,payment_type,payment_installments,payment_value,order_purchase_timestamp,date,hour
+572c4bbf0f5f85a9b4a2c4fe0c7f04d5,1,voucher,1,69.46,2018-08-30 15:11:58,2018-08-30,15

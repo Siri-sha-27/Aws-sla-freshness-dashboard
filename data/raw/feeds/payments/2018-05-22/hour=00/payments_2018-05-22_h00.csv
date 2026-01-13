@@ -1,0 +1,2 @@
+order_id,payment_sequential,payment_type,payment_installments,payment_value,order_purchase_timestamp,date,hour
+1d6bda6e5595652f956770a32ae4ba0d,1,boleto,1,757.42,2018-05-22 00:49:37,2018-05-22,0

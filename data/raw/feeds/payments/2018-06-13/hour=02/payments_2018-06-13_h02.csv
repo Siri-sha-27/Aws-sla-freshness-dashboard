@@ -1,0 +1,5 @@
+order_id,payment_sequential,payment_type,payment_installments,payment_value,order_purchase_timestamp,date,hour
+1d671f4aa75c57086215073b775c7f41,1,credit_card,1,57.8,2018-06-13 02:32:34,2018-06-13,2
+b1a88554eb1f7f68627549e26257b583,1,boleto,1,59.46,2018-06-13 02:19:56,2018-06-13,2
+1d671f4aa75c57086215073b775c7f41,2,voucher,1,74.66,2018-06-13 02:32:34,2018-06-13,2
+be6e0e5aee2918775fc14dfe68d18a37,1,credit_card,3,106.76,2018-06-13 02:16:03,2018-06-13,2

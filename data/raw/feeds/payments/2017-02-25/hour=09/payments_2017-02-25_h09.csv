@@ -1,0 +1,3 @@
+order_id,payment_sequential,payment_type,payment_installments,payment_value,order_purchase_timestamp,date,hour
+0880410ce1538dfc180e260708256fcb,2,voucher,1,50.0,2017-02-25 09:21:20,2017-02-25,9
+0880410ce1538dfc180e260708256fcb,1,credit_card,1,0.86,2017-02-25 09:21:20,2017-02-25,9
