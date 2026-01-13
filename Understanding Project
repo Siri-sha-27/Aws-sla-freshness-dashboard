@@ -1,0 +1,248 @@
+SLA Freshness & Business Monitoring Dashboard (AWS)
+1. Project Overview
+
+This project implements an end-to-end SLA monitoring system on AWS to track both data pipeline freshness and business delivery performance.
+It is designed to simulate a real-world data engineering SLA framework with alerting and visualization.
+
+The system is divided into two SLA layers and a centralized dashboard.
+
+🔹 Layer 1 — Pipeline Freshness SLA (Technical SLA)
+
+Monitors whether upstream data pipelines are delivering data on time.
+
+What it does:
+
+Checks data arrival timestamps in Amazon S3
+
+Detects late or missing data pipelines
+
+Classifies pipeline status (on-time / delayed / critical)
+
+Sends SNS email alerts for critical SLA breaches
+
+Stores SLA metrics back to S3 for downstream analysis
+
+🔹 Layer 2 — Business SLA (Operational SLA)
+
+Measures business-level delivery performance using order data.
+
+What it does:
+
+Computes order delivery delays
+
+Calculates late delivery KPIs
+
+Tracks 90-day business SLA trends
+
+Enables long-term SLA analysis using Athena views
+
+🔹 Dashboard Layer
+
+Provides a unified, real-time view of both SLA layers.
+
+Features:
+
+Single API endpoint
+
+Streamlit-based web dashboard
+
+Auto-refreshing metrics
+
+Visual indicators for SLA breaches (OK / WARNING / CRITICAL)
+
+2. High-Level Architecture
+Data Flow
+S3 (Raw Data)
+   ↓
+Lambda (Pipeline SLA Checker)
+   ↓
+S3 (SLA Metrics)
+   ↓
+Glue Data Catalog
+   ↓
+Athena (Views)
+   ↓
+Lambda (Dashboard API)
+   ↓
+API Gateway
+   ↓
+Streamlit Dashboard (EC2)
+
+Alert Flow
+Lambda → SNS → Email Notification
+
+3. Project Folder Structure
+sla-freshness-dashboard/
+│
+├── architecture/
+│   └── sla_architecture.png
+│
+├── lambda/
+│   ├── pipeline_sla_lambda.py
+│   └── dashboard_api_lambda.py
+│
+├── streamlit/
+│   ├── app.py
+│   └── requirements.txt
+│
+├── sql/
+│   ├── sla_latest_status.sql
+│   ├── orders_business_sla_kpi.sql
+│   └── orders_business_sla_trend_90d.sql
+│
+├── README.md
+└── .gitignore
+
+4. Step-by-Step Setup Guide
+STEP 1 — Prepare AWS S3 Buckets
+
+Create two S3 buckets:
+
+1. Raw data bucket
+
+de-sla-raw-<your-name>
+
+
+2. Results bucket
+
+de-sla-results-<your-name>
+
+
+Upload raw datasets into the following paths:
+
+staging/orders/
+staging/payments/
+staging/products/
+
+STEP 2 — Deploy Pipeline SLA Lambda (Layer 1)
+
+Go to AWS Lambda → Create function
+
+Runtime: Python 3.12
+
+Attach IAM permissions:
+
+AmazonS3ReadOnlyAccess
+
+AmazonS3FullAccess (results bucket)
+
+AmazonSNSFullAccess
+
+Paste code from:
+
+lambda/pipeline_sla_lambda.py
+
+
+Add environment variable:
+
+SNS_TOPIC_ARN = arn:aws:sns:...
+
+
+Test the function
+
+Verify SLA JSON output in CloudWatch logs
+
+Confirm SNS email notifications for critical breaches
+
+STEP 3 — Create Athena Tables & Views (Layer 2)
+
+Open Amazon Athena
+
+Set query results location (S3)
+
+Execute SQL files from the /sql folder:
+
+External tables
+
+Views:
+
+sla_latest_status
+
+orders_business_sla_kpi
+
+orders_business_sla_trend_90d
+
+STEP 4 — Deploy Dashboard API Lambda
+
+Create a new Lambda function
+
+Runtime: Python 3.12
+
+Attach IAM permissions:
+
+AmazonAthenaFullAccess
+
+AmazonS3ReadOnlyAccess
+
+Paste code from:
+
+lambda/dashboard_api_lambda.py
+
+
+This Lambda serves SLA metrics to the dashboard via API Gateway.
+
+STEP 5 — Create API Gateway
+
+Open API Gateway → HTTP API
+
+Create a route:
+
+GET /
+
+
+Integrate with Dashboard API Lambda
+
+Deploy the API
+
+Copy the generated API URL:
+
+https://xxxx.execute-api.us-east-1.amazonaws.com
+
+STEP 6 — Launch Streamlit Dashboard (EC2)
+1. Create EC2 Instance
+
+Amazon Linux 2023
+
+Open port 8501 in the security group
+
+2. SSH into EC2
+ssh -i your-key.pem ec2-user@<EC2_PUBLIC_IP>
+
+3. Install dependencies
+sudo yum update -y
+sudo yum install python3 -y
+python3 -m venv venv
+source venv/bin/activate
+pip install streamlit pandas requests
+
+4. Run the dashboard
+cd streamlit
+streamlit run app.py --server.address 0.0.0.0 --server.port 8501
+
+5. Open in browser
+http://<EC2_PUBLIC_IP>:8501
+
+
+Paste your API Gateway URL into the dashboard to load SLA metrics 🎉
+
+5. Alerting Mechanism (SNS)
+
+If any pipeline is classified as critically_late
+
+Pipeline SLA Lambda publishes a message to SNS
+
+Email notification is sent to subscribed users
+
+Dashboard displays a CRITICAL status badge
+
+6. Key Takeaways
+
+Demonstrates real-world SLA monitoring architecture
+
+Covers both technical and business SLAs
+
+Uses only core AWS services
+
+Fully serverless backend with a lightweight UI
+
+Suitable for data engineering portfolios and interviews
