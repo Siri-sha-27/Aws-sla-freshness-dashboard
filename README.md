@@ -156,7 +156,29 @@ This layer answers:
 - **IAM** – Secure access control
 
 ---
+## Security & IAM Permissions
 
+This project follows **least-privilege IAM principles**.
+
+### Lambda – Pipeline SLA Checker
+Permissions:
+- Read access to raw S3 buckets
+- Write access to SLA results S3 bucket
+- Publish access to Amazon SNS
+
+### Lambda – Dashboard API
+Permissions:
+- Execute Athena queries
+- Read Athena query results from S3
+- Read access to Glue Data Catalog
+
+### EC2 – Dashboard Host
+Permissions:
+- No AWS credentials required (public API access only)
+
+IAM roles are scoped to **only required resources**, avoiding wildcard permissions where possible.
+
+---
 ## Effectiveness of the Solution
 
 This system is effective because it:
@@ -210,4 +232,5 @@ It reflects **industry-style SLA monitoring**, not a toy example.
 
 Sirisha Gajula  
 GitHub: https://github.com/Siri-sha-27
+
 
