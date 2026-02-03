@@ -1,0 +1,117 @@
+Understanding the workflow
+
+PART 1️⃣ — SSH INTO EC2 (Windows → EC2)
+1. Verify your .pem key location (ON YOUR WINDOWS PC)
+Let’s assume your key is here (change if different):
+C:\Users\Siris\Downloads\sla-dashboard-key.pem
+
+If unsure, open File Explorer and confirm the filename.
+
+2. Fix key permissions (VERY IMPORTANT on Windows)
+Open PowerShell (not CMD) and run:
+icacls "C:\Users\Siris\Downloads\sla-dashboard-key.pem" /inheritance:r
+icacls "C:\Users\Siris\Downloads\sla-dashboard-key.pem" /grant:r "$($env:USERNAME):(R)"
+
+This avoids the Permission denied (publickey) error.
+
+3. SSH into EC2
+Replace:
+
+
+sla-dashboard-key.pem → your key name
+
+
+3.89.119.181 → your EC2 public IPv4
+
+
+ssh -i "C:\Users\Siris\Downloads\sla-dashboard-key.pem" ec2-user@3.89.119.181
+
+When asked:
+Are you sure you want to continue connecting?
+
+Type:
+yes
+
+✅ You should now see:
+[ec2-user@ip-xxx-xxx-xxx-xxx ~]$
+
+
+PART 2️⃣ — CHECK STREAMLIT APP FILES (ON EC2)
+4. Go to your home directory
+cd ~
+ls
+
+You should see:
+app.py
+venv/
+
+If you don’t see app.py, tell me before continuing.
+
+5. Open app.py to verify content
+nano app.py
+
+Check:
+
+
+API Gateway URL is correct
+
+
+No syntax errors
+
+
+To exit nano:
+CTRL + X → Y → ENTER
+
+
+PART 3️⃣ — ACTIVATE PYTHON ENVIRONMENT
+6. Activate virtual environment
+source venv/bin/activate
+
+You should now see:
+(venv) [ec2-user@ip-xxx ~]$
+
+
+7. Verify Streamlit is installed
+streamlit --version
+
+If not found, install it:
+pip install streamlit requests pandas plotly
+
+
+PART 4️⃣ — RUN STREAMLIT APP (CORRECT WAY)
+8. Run Streamlit (IMPORTANT FLAGS)
+streamlit run app.py --server.address 0.0.0.0 --server.port 8501
+
+Expected output:
+You can now view your Streamlit app in your browser.
+
+URL: http://0.0.0.0:8501
+
+⚠️ 0.0.0.0 is correct — do NOT open it directly
+
+PART 5️⃣ — OPEN PORT 8501 (SECURITY GROUP)
+If the site doesn’t load, this is usually the issue.
+9. Fix EC2 Security Group
+AWS Console → EC2 → Instances → Your Instance
+➡️ Security → Security groups → Edit inbound rules
+Add:
+TypeProtocolPortSourceCustom TCPTCP85010.0.0.0/0
+Save rules ✅
+
+PART 6️⃣ — OPEN DASHBOARD IN BROWSER
+10. Open in your browser (ON YOUR LAPTOP)
+http://3.89.119.181:8501
+
+You should see SLA Freshness Dashboard
+
+PART 7️⃣ — QUICK DEBUG COMMANDS (IF IT FAILS)
+Check if Streamlit is running
+ss -lntp | grep 8501
+
+Check app logs
+ps aux | grep streamlit
+
+Kill old Streamlit process (if needed)
+pkill -f streamlit
+
+Then re-run step 8.
